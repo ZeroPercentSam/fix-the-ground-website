@@ -1,7 +1,18 @@
 'use client';
 
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 import {
   BarChart, Bar, LineChart, Line, AreaChart, Area, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -58,9 +69,34 @@ interface TamDataItem {
 export function TamSamSomChart({ data }: { data: TamDataItem[] }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const isMobile = useIsMobile();
+
+  // On mobile, use vertical bars instead of horizontal for better readability
+  if (isMobile) {
+    const mobileData = data.map(d => ({ ...d, shortLabel: d.name }));
+    return (
+      <div ref={ref} className="w-full h-[300px]">
+        {isInView && (
+          <ResponsiveContainer>
+            <BarChart data={mobileData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" vertical={false} />
+              <XAxis dataKey="shortLabel" tick={{ fontSize: 12 }} />
+              <YAxis tickFormatter={(v) => `$${v}B`} width={45} tick={{ fontSize: 11 }} />
+              <Tooltip content={<CustomTooltip formatter={(v) => `$${v}B`} />} />
+              <Bar dataKey="value" radius={[8, 8, 0, 0]} animationDuration={1500}>
+                {data.map((_, i) => (
+                  <Cell key={i} fill={[COLORS.forest300, COLORS.forest500, COLORS.forest900][i]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        )}
+      </div>
+    );
+  }
 
   return (
-    <div ref={ref} className="w-full h-[350px]">
+    <div ref={ref} className="w-full h-[260px] sm:h-[350px]">
       {isInView && (
         <ResponsiveContainer>
           <BarChart data={data} layout="vertical" margin={{ left: 20, right: 60 }}>
@@ -91,7 +127,7 @@ export function SoilDeclineChart({ data }: { data: SoilDataItem[] }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="w-full h-[400px]">
+    <div ref={ref} className="w-full h-[280px] sm:h-[400px]">
       {isInView && (
         <ResponsiveContainer>
           <AreaChart data={data} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -125,7 +161,7 @@ export function WasteGapChart({ data }: { data: WasteDataItem[] }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="w-full h-[350px]">
+    <div ref={ref} className="w-full h-[260px] sm:h-[350px]">
       {isInView && (
         <ResponsiveContainer>
           <BarChart data={data} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -160,7 +196,7 @@ export function RevenueProjectionChart({ data }: { data: RevenueDataItem[] }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="w-full h-[400px]">
+    <div ref={ref} className="w-full h-[280px] sm:h-[400px]">
       {isInView && (
         <ResponsiveContainer>
           <BarChart data={data} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -192,7 +228,7 @@ export function ProfitabilityChart({ data }: { data: ProfitDataItem[] }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="w-full h-[400px]">
+    <div ref={ref} className="w-full h-[280px] sm:h-[400px]">
       {isInView && (
         <ResponsiveContainer>
           <ComposedChart data={data} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -223,7 +259,7 @@ export function UseOfFundsChart({ data }: { data: FundsDataItem[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <div ref={ref} className="w-full h-[400px]">
+    <div ref={ref} className="w-full h-[280px] sm:h-[400px]">
       {isInView && (
         <ResponsiveContainer>
           <PieChart>
@@ -284,7 +320,7 @@ export function WaterRetentionChart({ data }: { data: WaterDataItem[] }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="w-full h-[350px]">
+    <div ref={ref} className="w-full h-[260px] sm:h-[350px]">
       {isInView && (
         <ResponsiveContainer>
           <BarChart data={data} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -328,13 +364,13 @@ export function UnitEconomicsChart({ data }: { data: UnitEconItem[] }) {
   ];
 
   return (
-    <div ref={ref} className="w-full h-[400px]">
+    <div ref={ref} className="w-full h-[280px] sm:h-[400px]">
       {isInView && (
         <ResponsiveContainer>
-          <BarChart data={chartData} margin={{ top: 20, right: 30, bottom: 60, left: 20 }}>
+          <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 50, left: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" vertical={false} />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} angle={-30} textAnchor="end" />
-            <YAxis tickFormatter={(v) => `$${v}K`} />
+            <XAxis dataKey="name" tick={{ fontSize: 8 }} angle={-40} textAnchor="end" interval={0} />
+            <YAxis tickFormatter={(v) => `$${v}K`} width={45} tick={{ fontSize: 10 }} />
             <Tooltip formatter={(value) => [`$${value}K`, '']} />
             <Bar dataKey="amount" radius={[6, 6, 0, 0]} animationDuration={1500}>
               {chartData.map((entry, i) => (
