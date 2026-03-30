@@ -10,6 +10,7 @@ interface AnimatedCounterProps {
   label: string;
   decimals?: number;
   duration?: number;
+  dark?: boolean;
 }
 
 export default function AnimatedCounter({
@@ -19,6 +20,7 @@ export default function AnimatedCounter({
   label,
   decimals = 0,
   duration = 2,
+  dark = false,
 }: AnimatedCounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
@@ -48,10 +50,10 @@ export default function AnimatedCounter({
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-forest-900 font-[family-name:var(--font-display)]">
+      <div className={`text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-display)] ${dark ? 'text-white' : 'text-forest-900'}`}>
         {prefix}{displayValue}{suffix}
       </div>
-      <div className="mt-2 text-sm md:text-base text-forest-800/70 max-w-[200px] mx-auto leading-snug">
+      <div className={`mt-2 text-sm md:text-base max-w-[200px] mx-auto leading-snug ${dark ? 'text-forest-300/80' : 'text-forest-800/70'}`}>
         {label}
       </div>
     </motion.div>

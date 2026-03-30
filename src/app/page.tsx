@@ -23,19 +23,27 @@ export default function HomePage() {
       {/* ── Hero Section ── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-forest-950 via-forest-900 to-forest-800" />
+          {/* Background image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/images/hero-bg.jpeg')" }}
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-forest-950/70" />
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-forest-950/40 via-transparent to-forest-950/80" />
+          {/* Floating particles */}
           <div className="absolute inset-0 opacity-20">
-            {[...Array(30)].map((_, i) => (
+            {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-forest-300 rounded-full"
-                style={{ left: `${(i * 3.3) % 100}%`, top: `${(i * 7.7) % 100}%` }}
+                style={{ left: `${(i * 5) % 100}%`, top: `${(i * 7.7) % 100}%` }}
                 animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] }}
                 transition={{ duration: 3 + (i % 4), repeat: Infinity, delay: (i % 3), ease: 'easeInOut' }}
               />
             ))}
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-forest-950/80 to-transparent" />
         </motion.div>
 
         <motion.div style={{ opacity: heroOpacity }} className="relative z-10 max-w-5xl mx-auto px-4 text-center">

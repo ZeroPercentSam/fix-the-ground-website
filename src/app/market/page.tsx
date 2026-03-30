@@ -86,11 +86,11 @@ export default function MarketPage() {
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-8"
           >
-            <AnimatedCounter value={8.6} prefix="$" suffix="B" label="Total Addressable Market" decimals={1} duration={2.5} />
+            <AnimatedCounter value={8.6} prefix="$" suffix="B" label="Total Addressable Market" decimals={1} duration={2.5} dark />
             <div className="hidden md:block w-px h-16 bg-forest-500/30" />
-            <AnimatedCounter value={9.4} suffix="%" label="Annual Growth Rate" decimals={1} duration={2} />
+            <AnimatedCounter value={9.4} suffix="%" label="Annual Growth Rate" decimals={1} duration={2} dark />
             <div className="hidden md:block w-px h-16 bg-forest-500/30" />
-            <AnimatedCounter value={2.7} prefix="$" suffix="B" label="US Serviceable Market" decimals={1} duration={2} />
+            <AnimatedCounter value={2.7} prefix="$" suffix="B" label="US Serviceable Market" decimals={1} duration={2} dark />
           </motion.div>
         </motion.div>
       </section>

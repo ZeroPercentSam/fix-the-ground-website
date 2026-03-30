@@ -212,6 +212,7 @@ function InvestorDashboard() {
                       label={metric.label}
                       decimals={metric.decimals}
                       duration={1.5}
+                      dark
                     />
                   </div>
                 </ScrollReveal>
