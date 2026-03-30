@@ -427,7 +427,7 @@ function InvestorDashboard() {
                 <Mail size={18} />
                 invest@fixtheground.com
               </Button>
-              <Button href="#" variant="outline" size="lg" className="border-forest-300/30 text-forest-300 hover:bg-forest-300/10 hover:text-white">
+              <Button href="#" variant="outline" size="lg" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
                 <Calendar size={18} />
                 Schedule a Call
               </Button>

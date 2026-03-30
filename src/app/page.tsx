@@ -79,7 +79,7 @@ export default function HomePage() {
             <Button href="#crisis" variant="primary" size="lg" className="bg-forest-500 hover:bg-forest-700 text-white">
               Learn More <ArrowDown size={18} />
             </Button>
-            <Button href="/investors" variant="outline" size="lg" className="border-forest-300/30 text-forest-300 hover:bg-forest-300/10 hover:text-white">
+            <Button href="/investors" variant="outline" size="lg" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
               Investor Access <ArrowRight size={18} />
             </Button>
           </motion.div>
@@ -186,7 +186,7 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
           <div className="mt-8 text-center">
-            <Button href="/market" variant="outline" className="border-forest-300/30 text-forest-300 hover:bg-forest-300/10 hover:text-white">
+            <Button href="/market" variant="outline" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
               Explore Full Market Analysis <ChevronRight size={16} />
             </Button>
           </div>

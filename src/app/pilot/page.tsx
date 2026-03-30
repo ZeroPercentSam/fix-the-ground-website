@@ -462,7 +462,7 @@ export default function PilotPage() {
               <Button href="/investors" variant="secondary" size="lg">
                 Investor Overview <ChevronRight className="w-5 h-5" />
               </Button>
-              <Button href="/market" variant="outline" size="lg" className="border-forest-500/40 text-forest-300 hover:bg-forest-800 hover:text-white">
+              <Button href="/market" variant="outline" size="lg" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
                 Market Opportunity <ArrowRight className="w-5 h-5" />
               </Button>
             </div>

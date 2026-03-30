@@ -495,7 +495,7 @@ export default function ProblemPage() {
               <Button href="/solution" variant="primary" size="lg">
                 See The Solution <ArrowRight className="w-5 h-5" />
               </Button>
-              <Button href="/market" variant="outline" size="lg" className="border-forest-500 text-forest-300 hover:bg-forest-500 hover:text-white">
+              <Button href="/market" variant="outline" size="lg" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
                 Explore The Market <ChevronRight className="w-5 h-5" />
               </Button>
             </div>

@@ -485,7 +485,7 @@ export default function SolutionPage() {
               <Button href="/market" variant="primary" size="lg">
                 See The Market <ArrowRight className="w-5 h-5" />
               </Button>
-              <Button href="/investors" variant="outline" size="lg" className="border-forest-500 text-forest-300 hover:bg-forest-500 hover:text-white">
+              <Button href="/investors" variant="outline" size="lg" className="border-white/60 text-white hover:bg-white/15 hover:border-white">
                 Investor Deck <ChevronRight className="w-5 h-5" />
               </Button>
             </div>
